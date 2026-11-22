@@ -76,7 +76,7 @@ footer{padding:2.4rem 0;border-top:1px solid var(--line)}
 .bar-fill{background:var(--teal);height:100%;border-radius:999px}
 /* ——— Logo ——— */
 .brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;color:var(--ink);flex-shrink:0}
-.logo-mark{width:44px;height:44px;flex:0 0 44px;border-radius:11px;box-shadow:0 6px 16px rgba(11,110,106,.28);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.logo-mark{width:50px;height:50px;flex:0 0 50px;border-radius:12px;box-shadow:0 6px 16px rgba(11,110,106,.28);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
 .brand:hover .logo-mark{transform:rotate(-4deg) scale(1.06)}
 .logo-text{line-height:1.05;display:flex;flex-direction:column}
 .logo-name{font-weight:800;font-size:1.32rem;letter-spacing:-.02em;color:var(--ink)}
@@ -100,6 +100,7 @@ footer{padding:2.4rem 0;border-top:1px solid var(--line)}
 .float-badge .dot.amber{background:var(--amber)}
 .ticker{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface);padding:.65rem 0;margin-top:1.6rem;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
 .ticker-track{display:flex;gap:0;width:max-content;animation:tickerMove 26s linear infinite}
+.ticker-group{display:flex;flex:0 0 auto}
 .ticker-track span{font-size:.82rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 1.1rem;white-space:nowrap}
 .ticker-track span b{color:var(--teal)}
 .btn{position:relative;overflow:hidden;transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
@@ -110,20 +111,21 @@ footer{padding:2.4rem 0;border-top:1px solid var(--line)}
 .card,.stat,.step{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
 .card:hover,.stat:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(18,33,31,.10)}
 .step:hover{transform:translateX(3px)}
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+html.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1)}
 .reveal.is-in{opacity:1;transform:none}
 .bar-fill{transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.22,1,.36,1)}
 .bar-fill.is-in{transform:scaleX(1)}
 details{transition:border-color .2s ease} details[open]{border-color:var(--teal)}
 header.site{transition:box-shadow .25s ease} header.site.is-scrolled{box-shadow:0 6px 20px rgba(0,0,0,.08)}
 @media(max-width:820px){.hero-grid,.grid2,.grid3{grid-template-columns:1fr}.stat-strip{grid-template-columns:1fr 1fr}.bar-row{grid-template-columns:120px 1fr 56px}.pay-split{grid-template-columns:1fr !important}.float-badge.b1{left:6px}.float-badge.b2{right:6px}.logo-name{font-size:1.18rem}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}.bar-fill{transform:scaleX(1)}.ticker-track{animation:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal,html.js .reveal{opacity:1;transform:none}.bar-fill{transform:scaleX(1)}.ticker-track{animation:none}}
 </style>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 <header class="site" id="site-header"><div class="wrap nav">
   <a class="brand" href="#top" aria-label="Lodixo — GEO for Dentists, home">
-    <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="11" fill="#0b6e6a"/><path d="M24 9c-2.2 0-3-1.1-5.6-1.1-3.9 0-6.9 2.9-6.9 6.9 0 2.2.9 3.8 1.5 5.9.6 2.1.9 4.7 1.2 6.9.3 1.8.8 3.8 2.5 3.8 2 0 1.9-2.9 2.8-5.1.5-1.3 1.5-2.1 3.3-2.1s2.8.8 3.3 2.1c.9 2.2.8 5.1 2.8 5.1 1.7 0 2.2-2 2.5-3.8.3-2.2.6-4.8 1.2-6.9.6-2.1 1.5-3.7 1.5-5.9 0-4-3-6.9-6.9-6.9C27 7.9 26.2 9 24 9z" fill="#fff"/><circle cx="36.5" cy="10.5" r="4.2" fill="#e8b33d" stroke="#0b6e6a" stroke-width="1.6"/><path d="M34.8 10.5h3.4M36.5 8.8v3.4" stroke="#084f4c" stroke-width="1.1" stroke-linecap="round"/></svg>
+    <svg class="logo-mark" viewBox="0 0 48 48" role="img" aria-label="Lodixo logo — a white tooth with an amber AI spark on teal" focusable="false"><title>Lodixo logo</title><rect width="48" height="48" rx="11" fill="#0b6e6a"/><path d="M24 9c-2.2 0-3-1.1-5.6-1.1-3.9 0-6.9 2.9-6.9 6.9 0 2.2.9 3.8 1.5 5.9.6 2.1.9 4.7 1.2 6.9.3 1.8.8 3.8 2.5 3.8 2 0 1.9-2.9 2.8-5.1.5-1.3 1.5-2.1 3.3-2.1s2.8.8 3.3 2.1c.9 2.2.8 5.1 2.8 5.1 1.7 0 2.2-2 2.5-3.8.3-2.2.6-4.8 1.2-6.9.6-2.1 1.5-3.7 1.5-5.9 0-4-3-6.9-6.9-6.9C27 7.9 26.2 9 24 9z" fill="#fff"/><circle cx="36.5" cy="10.5" r="4.2" fill="#e8b33d" stroke="#0b6e6a" stroke-width="1.6"/><path d="M34.8 10.5h3.4M36.5 8.8v3.4" stroke="#084f4c" stroke-width="1.1" stroke-linecap="round"/></svg>
     <span class="logo-text"><span class="logo-name">LODIXO<i>.</i></span><span class="logo-sub">GEO for Dentists</span></span>
   </a>
   <nav class="navlinks" aria-label="Main">
@@ -153,15 +155,16 @@ header.site{transition:box-shadow .25s ease} header.site.is-scrolled{box-shadow:
       <p class="tiny" style="margin-top:.5rem">Patients increasingly start with an AI answer, not a list of links. This site shows you how that answer is measured — and fixed.</p>
     </div>
   </div>
-  <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker-track">
-    <span><b>ChatGPT</b> &nbsp;✦</span><span><b>Perplexity</b> &nbsp;✦</span><span><b>Gemini</b> &nbsp;✦</span><span><b>Google AI Overviews</b> &nbsp;✦</span><span><b>Dental AI Visibility Audit — $495</b> &nbsp;✦</span><span><b>GEO Retainer — $795 / 30 days</b> &nbsp;✦</span>
+  <div class="ticker"><div class="ticker-track" id="ticker-track">
+    <div class="ticker-group"><span><b>ChatGPT</b> &nbsp;✦</span><span><b>Perplexity</b> &nbsp;✦</span><span><b>Gemini</b> &nbsp;✦</span><span><b>Google AI Overviews</b> &nbsp;✦</span><span><b>Dental AI Visibility Audit — $495</b> &nbsp;✦</span><span><b>GEO Retainer — $795 / 30 days</b> &nbsp;✦</span></div>
+    <div class="ticker-group" aria-hidden="true"><span><b>ChatGPT</b> &nbsp;✦</span><span><b>Perplexity</b> &nbsp;✦</span><span><b>Gemini</b> &nbsp;✦</span><span><b>Google AI Overviews</b> &nbsp;✦</span><span><b>Dental AI Visibility Audit — $495</b> &nbsp;✦</span><span><b>GEO Retainer — $795 / 30 days</b> &nbsp;✦</span></div>
   </div></div>
 
   <div class="stat-strip">
-    <div class="stat reveal"><b><span class="count" data-count="49">0</span>%</b>of US adults use AI chatbots; <strong>42%</strong> use them to search for information.<span class="small" style="display:block">Pew Research, Feb 2026 (5,119 US adults), via FirstPromoter</span></div>
-    <div class="stat reveal"><b>~<span class="count" data-count="12800">0</span> / mo</b>US searches across the GEO keyword cluster.<span class="small" style="display:block">Google Ads data via DataForSEO, 8 Sep 2026, via SaaSCity</span></div>
-    <div class="stat reveal"><b><span class="count" data-count="85">0</span>%</b>of brand mentions in AI search come from third-party sources — brands are 6.5× more likely to be mentioned via a third-party page than their own domain.<span class="small" style="display:block">AirOps, via Virayo</span></div>
-    <div class="stat reveal"><b><span class="count" data-count="200000">0</span>+</b>professionally active dentists in the US; 135,665 dental offices.<span class="small" style="display:block">ADA Health Policy Institute; US Census Bureau</span></div>
+    <div class="stat reveal"><b><span class="count" data-count="49">49</span>%</b>of US adults use AI chatbots; <strong>42%</strong> use them to search for information.<span class="small" style="display:block">Pew Research, Feb 2026 (5,119 US adults), via FirstPromoter</span></div>
+    <div class="stat reveal"><b>~<span class="count" data-count="12800">12,800</span> / mo</b>US searches across the GEO keyword cluster.<span class="small" style="display:block">Google Ads data via DataForSEO, 8 Sep 2026, via SaaSCity</span></div>
+    <div class="stat reveal"><b><span class="count" data-count="85">85</span>%</b>of brand mentions in AI search come from third-party sources — brands are 6.5× more likely to be mentioned via a third-party page than their own domain.<span class="small" style="display:block">AirOps, via Virayo</span></div>
+    <div class="stat reveal"><b><span class="count" data-count="200000">200,000</span>+</b>professionally active dentists in the US; 135,665 dental offices.<span class="small" style="display:block">ADA Health Policy Institute; US Census Bureau</span></div>
   </div>
 </div>
 
@@ -415,7 +418,7 @@ header.site{transition:box-shadow .25s ease} header.site.is-scrolled{box-shadow:
 
 <footer><div class="wrap">
   <div class="footer-logo">
-    <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true" style="width:38px;height:38px;flex-basis:38px"><rect width="48" height="48" rx="11" fill="#0b6e6a"/><path d="M24 9c-2.2 0-3-1.1-5.6-1.1-3.9 0-6.9 2.9-6.9 6.9 0 2.2.9 3.8 1.5 5.9.6 2.1.9 4.7 1.2 6.9.3 1.8.8 3.8 2.5 3.8 2 0 1.9-2.9 2.8-5.1.5-1.3 1.5-2.1 3.3-2.1s2.8.8 3.3 2.1c.9 2.2.8 5.1 2.8 5.1 1.7 0 2.2-2 2.5-3.8.3-2.2.6-4.8 1.2-6.9.6-2.1 1.5-3.7 1.5-5.9 0-4-3-6.9-6.9-6.9C27 7.9 26.2 9 24 9z" fill="#fff"/><circle cx="36.5" cy="10.5" r="4.2" fill="#e8b33d" stroke="#0b6e6a" stroke-width="1.6"/></svg>
+    <svg class="logo-mark" viewBox="0 0 48 48" role="img" aria-label="Lodixo logo — a white tooth with an amber AI spark on teal" style="width:38px;height:38px;flex-basis:38px"><title>Lodixo logo</title><rect width="48" height="48" rx="11" fill="#0b6e6a"/><path d="M24 9c-2.2 0-3-1.1-5.6-1.1-3.9 0-6.9 2.9-6.9 6.9 0 2.2.9 3.8 1.5 5.9.6 2.1.9 4.7 1.2 6.9.3 1.8.8 3.8 2.5 3.8 2 0 1.9-2.9 2.8-5.1.5-1.3 1.5-2.1 3.3-2.1s2.8.8 3.3 2.1c.9 2.2.8 5.1 2.8 5.1 1.7 0 2.2-2 2.5-3.8.3-2.2.6-4.8 1.2-6.9.6-2.1 1.5-3.7 1.5-5.9 0-4-3-6.9-6.9-6.9C27 7.9 26.2 9 24 9z" fill="#fff"/><circle cx="36.5" cy="10.5" r="4.2" fill="#e8b33d" stroke="#0b6e6a" stroke-width="1.6"/></svg>
     <span class="logo-text"><span class="logo-name" style="font-size:1.15rem">LODIXO<i>.</i></span><span class="logo-sub">GEO for Dentists</span></span>
   </div>
   <p><strong>Lodixo · GEO for Dentists</strong> — Dental AI Visibility Audit $495 via Payoneer invoice · GEO Retainer $795 per 30 days via Payoneer invoice · Payoneer ID: akrambd1212@gmail.com.</p>
@@ -497,27 +500,39 @@ function copyBooking(){
 /* ——— Lightweight dynamism: reveal, counters, bars, header ——— */
 (function(){
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // Ticker: duplicate once for a seamless loop (no library)
-  var track=document.getElementById('ticker-track'); if(track){ track.innerHTML+=track.innerHTML; }
-  // Auto-tag reveal targets so existing content animates without extra markup
+  // (The ticker's seamless loop copies are in the markup — no JS needed for it.)
+  // Auto-tag reveal targets so existing content animates without extra markup.
+  // Never hide the interactive forms (#checker, #book) or anything holding form
+  // controls or buttons — those must always be visible and usable.
   if(!reduce){
-    document.querySelectorAll('section .card, section h2, .step, #example .card, .notice').forEach(function(el){ if(!el.classList.contains('reveal')) el.classList.add('reveal'); });
+    document.querySelectorAll('section .card, section h2, .step, #example .card, .notice').forEach(function(el){
+      if(el.classList.contains('reveal')) return;
+      if(el.closest && el.closest('#checker, #book')) return;
+      if(el.querySelector && el.querySelector('input, select, textarea, button, form')) return;
+      el.classList.add('reveal');
+    });
   }
+  var counted=new WeakSet();
   function animateCount(el){
     var target=+el.getAttribute('data-count'); if(!target) return;
     if(reduce){ el.textContent=target.toLocaleString('en-US'); return; }
+    // The markup already carries the final value; drop to 0 only now, at the
+    // moment the count-up actually starts, so the number is never stuck at 0.
+    el.textContent='0';
     var start=null, dur=1100;
     function tick(ts){ if(!start) start=ts; var p=Math.min((ts-start)/dur,1); var eased=1-Math.pow(1-p,3); el.textContent=Math.round(target*eased).toLocaleString('en-US'); if(p<1) requestAnimationFrame(tick); }
     requestAnimationFrame(tick);
   }
-  var counted=new WeakSet();
+  function runCounts(scope){
+    scope.querySelectorAll('.count').forEach(function(c){ if(!counted.has(c)){ counted.add(c); animateCount(c); } });
+    if(scope.classList && scope.classList.contains('count') && !counted.has(scope)){ counted.add(scope); animateCount(scope); }
+  }
+  function revealEl(el){ el.classList.add('is-in'); runCounts(el); }
   if('IntersectionObserver' in window && !reduce){
     var io=new IntersectionObserver(function(entries){
       entries.forEach(function(en){
         if(!en.isIntersecting) return;
-        en.target.classList.add('is-in');
-        en.target.querySelectorAll('.count').forEach(function(c){ if(!counted.has(c)){ counted.add(c); animateCount(c); } });
-        if(en.target.classList.contains('count') && !counted.has(en.target)){ counted.add(en.target); animateCount(en.target); }
+        revealEl(en.target);
         io.unobserve(en.target);
       });
     },{threshold:.16,rootMargin:'0px 0px -6% 0px'});
@@ -526,7 +541,14 @@ function copyBooking(){
       var bio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-in'); bio.unobserve(e.target); } }); },{threshold:.35});
       bio.observe(el);
     });
-    // Example-audit SVG bars: gentle grow via CSS transform on the teal/red rects is skipped — bars above cover the pattern
+    // Safety net: if an observer event is ever missed, nothing in or near the
+    // viewport may stay hidden — reveal it (and run its counters) after a beat.
+    setTimeout(function(){
+      document.querySelectorAll('.reveal:not(.is-in)').forEach(function(el){
+        var r=el.getBoundingClientRect();
+        if(r.bottom>0 && r.top<window.innerHeight*1.5){ revealEl(el); io.unobserve(el); }
+      });
+    },2400);
   } else {
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-in'); });
     document.querySelectorAll('.bar-fill').forEach(function(el){ el.classList.add('is-in'); });
