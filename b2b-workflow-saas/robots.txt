@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lodixo247.github.io/b2b-workflow-saas/sitemap.xml
