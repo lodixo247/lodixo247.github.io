@@ -111,14 +111,13 @@ footer{padding:2.4rem 0;border-top:1px solid var(--line)}
 .card,.stat,.step{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
 .card:hover,.stat:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(18,33,31,.10)}
 .step:hover{transform:translateX(3px)}
-html.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,1,.36,1)}
-html.js .reveal.is-in,.reveal.is-in{opacity:1;transform:none}
-.bar-fill{transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.22,1,.36,1)}
-.bar-fill.is-in{transform:scaleX(1)}
+/* No scroll-reveal hiding: every section is visible by default. The .reveal
+   class remains in the markup but carries no hidden starting state. */
+.bar-fill{transform-origin:left;transform:scaleX(1)}
 details{transition:border-color .2s ease} details[open]{border-color:var(--teal)}
 header.site{transition:box-shadow .25s ease} header.site.is-scrolled{box-shadow:0 6px 20px rgba(0,0,0,.08)}
 @media(max-width:820px){.hero-grid,.grid2,.grid3{grid-template-columns:1fr}.stat-strip{grid-template-columns:1fr 1fr}.bar-row{grid-template-columns:120px 1fr 56px}.pay-split{grid-template-columns:1fr !important}.float-badge.b1{left:6px}.float-badge.b2{right:6px}.logo-name{font-size:1.18rem}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal,html.js .reveal{opacity:1;transform:none}.bar-fill{transform:scaleX(1)}.ticker-track{animation:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.bar-fill{transform:scaleX(1)}.ticker-track{animation:none}}
 </style>
 <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -497,61 +496,35 @@ function copyBooking(){
   var txt=bookingText();
   if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(function(){ document.getElementById('bk-status').textContent='Copied. Paste it into an email to thynkry@gmail.com.'; }); }
 }
-/* ——— Lightweight dynamism: reveal, counters, bars, header ——— */
+/* ——— Lightweight dynamism: counters + header shadow ———
+   No scroll-reveal: nothing on this page starts hidden. All sections,
+   stats, cards and bars are visible by default, with or without JS. */
 (function(){
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   // (The ticker's seamless loop copies are in the markup — no JS needed for it.)
-  // Auto-tag reveal targets so existing content animates without extra markup.
-  // Never hide the interactive forms (#checker, #book) or anything holding form
-  // controls or buttons — those must always be visible and usable.
-  if(!reduce){
-    document.querySelectorAll('section .card, section h2, .step, #example .card, .notice').forEach(function(el){
-      if(el.classList.contains('reveal')) return;
-      if(el.closest && el.closest('#checker, #book')) return;
-      if(el.querySelector && el.querySelector('input, select, textarea, button, form')) return;
-      el.classList.add('reveal');
-    });
-  }
   var counted=new WeakSet();
   function animateCount(el){
+    if(counted.has(el)) return; counted.add(el);
     var target=+el.getAttribute('data-count'); if(!target) return;
     if(reduce){ el.textContent=target.toLocaleString('en-US'); return; }
     // The markup already carries the final value; drop to 0 only now, at the
-    // moment the count-up actually starts, so the number is never stuck at 0.
+    // moment the count-up actually starts, so the number is never stuck at 0
+    // and stays fully visible if this animation never runs.
     el.textContent='0';
     var start=null, dur=1100;
     function tick(ts){ if(!start) start=ts; var p=Math.min((ts-start)/dur,1); var eased=1-Math.pow(1-p,3); el.textContent=Math.round(target*eased).toLocaleString('en-US'); if(p<1) requestAnimationFrame(tick); }
     requestAnimationFrame(tick);
   }
-  function runCounts(scope){
-    scope.querySelectorAll('.count').forEach(function(c){ if(!counted.has(c)){ counted.add(c); animateCount(c); } });
-    if(scope.classList && scope.classList.contains('count') && !counted.has(scope)){ counted.add(scope); animateCount(scope); }
-  }
-  function revealEl(el){ el.classList.add('is-in'); runCounts(el); }
   if('IntersectionObserver' in window && !reduce){
-    var io=new IntersectionObserver(function(entries){
+    var cio=new IntersectionObserver(function(entries){
       entries.forEach(function(en){
         if(!en.isIntersecting) return;
-        revealEl(en.target);
-        io.unobserve(en.target);
+        animateCount(en.target);
+        cio.unobserve(en.target);
       });
-    },{threshold:.16,rootMargin:'0px 0px -6% 0px'});
-    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-    document.querySelectorAll('.bar-fill').forEach(function(el){
-      var bio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-in'); bio.unobserve(e.target); } }); },{threshold:.35});
-      bio.observe(el);
-    });
-    // Safety net: if an observer event is ever missed, nothing in or near the
-    // viewport may stay hidden — reveal it (and run its counters) after a beat.
-    setTimeout(function(){
-      document.querySelectorAll('.reveal:not(.is-in)').forEach(function(el){
-        var r=el.getBoundingClientRect();
-        if(r.bottom>0 && r.top<window.innerHeight*1.5){ revealEl(el); io.unobserve(el); }
-      });
-    },2400);
+    },{threshold:.35});
+    document.querySelectorAll('.count').forEach(function(el){ cio.observe(el); });
   } else {
-    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-in'); });
-    document.querySelectorAll('.bar-fill').forEach(function(el){ el.classList.add('is-in'); });
     document.querySelectorAll('.count').forEach(animateCount);
   }
   // Header shadow on scroll — passive, rAF-throttled
