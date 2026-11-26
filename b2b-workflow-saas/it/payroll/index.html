@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      /* Light/Dark choice, set before first paint so there is never a
+         flash of the wrong theme: the saved choice wins; on the very
+         first visit the device system setting decides. */
+      try {
+        var t = window.localStorage.getItem("ruhiflow-theme");
+        if (t !== "light" && t !== "dark") t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = t;
+      } catch (e) { document.documentElement.dataset.theme = "light"; }
+    </script>
+    <style>
+      /* RuhiFlow boot screen — inline critical CSS, so the very first
+         paint is the branded loading animation below, never the raw
+         unstyled page text. The app fades #rf-boot out the moment it
+         has mounted (see src/main.tsx); a safety timer in the body
+         fades it out even if the app bundle itself fails to load.
+         The crawlable #static-seo block stays in the HTML for search
+         engines but is never painted on screen. */
+      #static-seo { display: none; }
+      #rf-boot {
+        position: fixed; inset: 0; z-index: 9999;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        gap: 22px; padding: 24px; text-align: center;
+        background: #f9fafb; color: #111827;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        transition: opacity .45s ease;
+      }
+      :root[data-theme="dark"] #rf-boot { background: #0f0d1a; color: #f2f1fa; }
+      #rf-boot.rf-boot-done { opacity: 0; pointer-events: none; }
+      .rf-boot-mark {
+        width: 84px; height: 84px; border-radius: 24px;
+        background: #ffffff; border: 1px solid #e2e5ec;
+        box-shadow: 0 2px 5px rgb(17 24 39 / .05), 0 18px 38px rgb(17 24 39 / .10);
+        display: flex; align-items: center; justify-content: center;
+        animation: rf-boot-rise .6s cubic-bezier(.22, .8, .3, 1) both;
+      }
+      :root[data-theme="dark"] .rf-boot-mark { background: #1e1b4b; border-color: #353170; box-shadow: 0 18px 38px rgb(0 0 0 / .45); }
+      .rf-boot-spark { transform-box: fill-box; transform-origin: center; animation: rf-boot-spark 2.2s ease-in-out .5s infinite; }
+      .rf-boot-name {
+        font-size: 30px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+        animation: rf-boot-rise .6s cubic-bezier(.22, .8, .3, 1) .08s both;
+      }
+      .rf-boot-name .rf-boot-flow {
+        background: linear-gradient(96deg, #6d28d9 0%, #4f46e5 46%, #14b8a6 100%);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+      :root[data-theme="dark"] .rf-boot-name .rf-boot-flow {
+        background: linear-gradient(96deg, #7c3aed 0%, #6366f1 46%, #14b8a6 100%);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+      }
+      .rf-boot-tag {
+        margin: -14px 0 0; font-size: 15px; color: #4b5563;
+        animation: rf-boot-rise .6s cubic-bezier(.22, .8, .3, 1) .16s both;
+      }
+      :root[data-theme="dark"] .rf-boot-tag { color: #c6c2de; }
+      .rf-boot-bar {
+        width: 168px; height: 4px; border-radius: 999px; overflow: hidden;
+        background: rgb(17 24 39 / .08);
+        animation: rf-boot-rise .6s cubic-bezier(.22, .8, .3, 1) .24s both;
+      }
+      :root[data-theme="dark"] .rf-boot-bar { background: rgb(255 255 255 / .14); }
+      .rf-boot-bar-fill {
+        width: 45%; height: 100%; border-radius: 999px;
+        background: linear-gradient(96deg, #6d28d9 0%, #4f46e5 46%, #14b8a6 100%);
+        animation: rf-boot-flow 1.15s ease-in-out infinite;
+      }
+      @keyframes rf-boot-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes rf-boot-spark { 0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; } 50% { transform: scale(1.14) rotate(8deg); opacity: .85; } }
+      @keyframes rf-boot-flow { 0% { transform: translateX(-110%); } 100% { transform: translateX(380%); } }
+      @media (prefers-reduced-motion: reduce) {
+        #rf-boot { transition: none; }
+        .rf-boot-mark, .rf-boot-name, .rf-boot-tag, .rf-boot-bar, .rf-boot-spark, .rf-boot-bar-fill { animation: none; }
+        .rf-boot-bar-fill { transform: translateX(60%); }
+      }
+    </style>
+    <title>Buste Paga per Team di 3 Persone — RuhiFlow</title>
+    <meta name="description" content="Buste Paga per Team di 3 Persone — Crea gratis in pochi minuti — con il tuo logo, i tuoi colori e il tuo marchio. Senza registrazione." />
+    <meta name="keywords" content="receipt generator, invoice generator, profit and loss statement template, purchase order template, payroll calculator, mileage log, nda generator, small business ai assistant" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="RuhiFlow" />
+    <link rel="canonical" href="https://lodixo247.github.io/b2b-workflow-saas/it/payroll" />
+    <link rel="alternate" hreflang="en" href="https://lodixo247.github.io/b2b-workflow-saas/payroll" />
+    <link rel="alternate" hreflang="es" href="https://lodixo247.github.io/b2b-workflow-saas/es/payroll" />
+    <link rel="alternate" hreflang="fr" href="https://lodixo247.github.io/b2b-workflow-saas/fr/payroll" />
+    <link rel="alternate" hreflang="de" href="https://lodixo247.github.io/b2b-workflow-saas/de/payroll" />
+    <link rel="alternate" hreflang="pt" href="https://lodixo247.github.io/b2b-workflow-saas/pt/payroll" />
+    <link rel="alternate" hreflang="ar" href="https://lodixo247.github.io/b2b-workflow-saas/ar/payroll" />
+    <link rel="alternate" hreflang="id" href="https://lodixo247.github.io/b2b-workflow-saas/id/payroll" />
+    <link rel="alternate" hreflang="tr" href="https://lodixo247.github.io/b2b-workflow-saas/tr/payroll" />
+    <link rel="alternate" hreflang="ja" href="https://lodixo247.github.io/b2b-workflow-saas/ja/payroll" />
+    <link rel="alternate" hreflang="it" href="https://lodixo247.github.io/b2b-workflow-saas/it/payroll" />
+    <link rel="alternate" hreflang="nl" href="https://lodixo247.github.io/b2b-workflow-saas/nl/payroll" />
+    <link rel="alternate" hreflang="ko" href="https://lodixo247.github.io/b2b-workflow-saas/ko/payroll" />
+    <link rel="alternate" hreflang="pl" href="https://lodixo247.github.io/b2b-workflow-saas/pl/payroll" />
+    <link rel="alternate" hreflang="vi" href="https://lodixo247.github.io/b2b-workflow-saas/vi/payroll" />
+    <link rel="alternate" hreflang="ur" href="https://lodixo247.github.io/b2b-workflow-saas/ur/payroll" />
+    <link rel="alternate" hreflang="x-default" href="https://lodixo247.github.io/b2b-workflow-saas/payroll" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RuhiFlow" />
+    <meta property="og:title" content="Buste Paga per Team di 3 Persone — RuhiFlow" />
+    <meta property="og:description" content="Buste Paga per Team di 3 Persone — Crea gratis in pochi minuti — con il tuo logo, i tuoi colori e il tuo marchio. Senza registrazione." />
+    <meta property="og:url" content="https://lodixo247.github.io/b2b-workflow-saas/it/payroll" />
+    <meta property="og:image" content="https://lodixo247.github.io/b2b-workflow-saas/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="RuhiFlow — 36 small-business tools in one workspace, with Ruhi AI Assistant" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://lodixo247.github.io/b2b-workflow-saas/og-image.png" />
+    <meta name="twitter:title" content="Buste Paga per Team di 3 Persone — RuhiFlow" />
+    <meta name="twitter:description" content="Buste Paga per Team di 3 Persone — Crea gratis in pochi minuti — con il tuo logo, i tuoi colori e il tuo marchio. Senza registrazione." />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg fill='%23111827'%3E%3Cpath d='M4 4 H30 C38 4 44 8.2 44 14 C44 19.8 38 24 30 24 H4 Z'/%3E%3Cpath d='M24 24 H33 C39.5 24 44 28.6 44 35 V44 H24 Z'/%3E%3Cpath d='M14 23.5 C15.6 28.8 18.2 31.4 24.5 33 C18.2 34.6 15.6 37.2 14 44.5 C12.4 37.2 9.8 34.6 3.5 33 C9.8 31.4 12.4 28.8 14 23.5 Z'/%3E%3C/g%3E%3C/svg%3E" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "RuhiFlow",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Thirty-six small-business tools — receipts, invoices, profit and loss, payroll, proposals, contracts, NDAs and calculators — plus the Ruhi AI Assistant, in one workspace.",
+      "offers": [
+        { "@type": "Offer", "name": "Pro", "price": "20.00", "priceCurrency": "USD", "description": "All 36 tools for 1 user." }
+      ]
+    }
+    </script>
+    
+  <link rel="stylesheet" crossorigin href="../../assets/index-maypk8fk.css"><script type="module" crossorigin src="../../assets/index-7sf22wtc.js"></script></head>
+  <body>
+    <noscript><style>#rf-boot { display: none; } #static-seo { display: block; }</style></noscript>
+    <!-- RuhiFlow boot screen: the branded loading animation shown from
+         the first paint until the app mounts (src/main.tsx fades it
+         out). Pure HTML/CSS — it needs no JavaScript or stylesheet to
+         appear, so the raw page text is never what a visitor sees. -->
+    <div id="rf-boot" role="status" aria-label="RuhiFlow is loading">
+      <div class="rf-boot-mark">
+        <svg width="62" height="62" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M4 4 H30 C38 4 44 8.2 44 14 C44 19.8 38 24 30 24 H4 Z" fill="currentColor" />
+          <path d="M24 24 H33 C39.5 24 44 28.6 44 35 V44 H24 Z" fill="currentColor" />
+          <path class="rf-boot-spark" d="M14 23.5 C15.6 28.8 18.2 31.4 24.5 33 C18.2 34.6 15.6 37.2 14 44.5 C12.4 37.2 9.8 34.6 3.5 33 C9.8 31.4 12.4 28.8 14 23.5 Z" fill="currentColor" />
+        </svg>
+      </div>
+      <div class="rf-boot-name">Ruhi<span class="rf-boot-flow">Flow</span></div>
+      <p class="rf-boot-tag">Work flows. Ruhi runs it.</p>
+      <div class="rf-boot-bar" aria-hidden="true"><div class="rf-boot-bar-fill"></div></div>
+    </div>
+    <script>
+      /* Boot safety net: if the app has not taken over within a few
+         seconds (blocked or failed bundle), fade the boot screen out
+         anyway so the page underneath is never trapped behind it.
+         The app cancels this timer when it dismisses the boot screen
+         itself — see src/main.tsx. */
+      window.__rfBootTimer = window.setTimeout(function () {
+        var b = document.getElementById("rf-boot");
+        if (b) { b.classList.add("rf-boot-done"); window.setTimeout(function () { b.remove(); }, 500); }
+      }, 6000);
+    </script>
+    <!-- Static, crawlable summary present in the initial HTML. The interactive
+         app replaces this block on load. Every tool also has its own real,
+         indexable page at its own path (e.g. /receipt-generator) — the build
+         generates a static HTML document per route with its own title, H1,
+         meta, canonical, content, FAQ, and schema. No hash routes. -->
+        <div id="static-seo">
+      <h1>Buste Paga per Team di 3 Persone</h1>
+      <p>Buste Paga per Team di 3 Persone — Crea gratis in pochi minuti — con il tuo logo, i tuoi colori e il tuo marchio. Senza registrazione.</p>
+      <p>Buste Paga per Team di 3 Persone — Crea gratis in pochi minuti — con il tuo logo, i tuoi colori e il tuo marchio. Senza registrazione.</p>
+      <nav aria-label="All tools">
+        <ul>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/receipt-generator">Receipt Generator</a> — Create and send receipts, then find any of them later in a searchable ledger.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/profit-and-loss">Profit &amp; Loss from Bank Export</a> — Upload a bank CSV file. The app sorts the money in and out for you, and makes your profit &amp; loss report.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/purchase-order">Purchase Order Tool</a> — Send numbered purchase orders and track what is still on its way.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/time-off-tracker">Time-Off Tracker</a> — Write down who is away and when. Approve time off in one tap.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/payroll">Payroll for a 3-Person Team</a> — Pay your team: hours × rate, minus deductions = the pay each person takes home.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/shift-roster">Shift Roster Generator</a> — Plan one week of work shifts. See empty slots at a glance.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/lease-agreement">Lease Agreement Builder</a> — Draft a clear lease with rent, deposit, dates, and terms in one place.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/gantt-chart">Gantt &amp; Roadmap Generator</a> — Turn a task list into a timeline with owners and deadlines.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/job-application-form">Job Application Form Builder</a> — Build a form, share it, and collect applications in one list.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/rent-ledger">Rent Ledger &amp; Receipts</a> — Track rent paid and hand the tenant a receipt every month.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/shipping-labels">Packing Slips &amp; Shipping Labels</a> — Make a label and a packing slip for every order you ship.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/timesheets">Timesheets That End in an Invoice</a> — Log hours all week; bill them in one click.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/contractor-quote">Contractor Quote Builder</a> — Price the job with line items and send a quote that looks professional.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/invoice-generator">Invoice Generator</a> — Create invoices, send them, and track what is paid and what is still owed.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/expense-tracker">Business Expense Tracker</a> — Log every business expense by category and watch the monthly totals build.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/mileage-log">Mileage Log Tracker</a> — Log business miles trip by trip and see exactly what the deduction is worth.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/sales-tax-calculator">Sales Tax Calculator</a> — Work out the sales tax on any price in one tap.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/business-loan-calculator">Business Loan Calculator</a> — Know the monthly payment and total interest before you sign anything.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/paycheck-calculator">Paycheck / Salary Calculator</a> — Turn an hourly rate into a salary — and a gross paycheck into take-home pay.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/service-agreement">Service Agreement Builder</a> — Write down the work, the fee, and the rules before you start.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/business-proposal">Business Proposal Builder</a> — Write a proposal, add your price, and track if the client says yes or no.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/inventory-tracker">Inventory Tracker</a> — Know what you have, what it is worth, and what is about to run out.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/cash-flow-forecast">Cash Flow Forecast</a> — See how much money you may have in the next 3 months, month by month.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/margin-calculator">Profit Margin &amp; Break-Even Calculator</a> — Price with the margin in front of you — and know your break-even point.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/hourly-rate-calculator">Freelancer Hourly Rate Calculator</a> — Set a rate that covers salary, expenses, tax, and time off — not just rent.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/nda-generator">NDA Generator</a> — Keep private talks private. A simple written promise — one-way or mutual.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/employment-agreement">Employment Agreement Builder</a> — Put the role, salary, and start date in writing for every new hire.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/client-onboarding">Client Onboarding Form Builder</a> — Collect every client's details once, up front, in one tidy list.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/subscription-tracker">Subscription Tracker</a> — See what your subscriptions really cost per month — and when they renew.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/project-budget">Project Budget Tracker</a> — Set a budget for each project and track what you spend, so you never go over.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/send-and-sign">Send &amp; Sign — E-Signature Requests</a> — Send a document for signature and track it — sent, viewed, signed — in one simple list.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/bulk-documents">Bulk Document Generator</a> — Upload a spreadsheet and make many invoices, receipts or payslips at once — one document per row.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/payment-links">Invoice Payment Links</a> — Put your own payment link on an invoice as a clear Pay now button, so customers can pay in one tap.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/customers">Customers — Simple CRM &amp; Follow-Ups</a> — One tidy list of your customers — what they bought, what they owe, deals and follow-ups.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/appointments">Appointments — Booking Calendar</a> — Set your services once, then book customers in — the day's bookings, clear at a glance.</li>
+          <li><a href="https://lodixo247.github.io/b2b-workflow-saas/recurring-invoices">Recurring Invoices</a> — Set an invoice to repeat weekly or monthly — one tap creates the next one when it's due.</li>
+        </ul>
+      </nav>
+      <p>RuhiFlow — work flows, Ruhi runs it. Every tool can be tried free — email asked once when you first download. Ruhi AI Assistant plus any 3 tools are free, and Ruhi helps you fully in chat on Free; Pro is $20/mo for 1 user — the one paid plan — covering all thirty-six tools with Ruhi always active for everything, renewing monthly or yearly.</p>
+    </div>
+    <div
+      data-generated-space-root=""
+      data-generated-space-slug="b2b-workflow-saas"
+    ></div>
+  </body>
+</html>
