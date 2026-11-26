@@ -1,6 +1,6 @@
 {
-  "built_at": "2026-11-26T04:22:38.531399877+00:00",
-  "content_sha256": "8c1bb4c7e306fd4241484916b6553df85a747f1b93f12797b99fa734235a05de",
+  "built_at": "2026-11-26T05:11:47.335290223+00:00",
+  "content_sha256": "79090bdc0d45bfe656d6de0f41e7b127e3c6432becd02736b2cf8ef5eee4fec4",
   "entrypoint": "index.html",
   "format": "bun-space-manifest-v1"
 }
